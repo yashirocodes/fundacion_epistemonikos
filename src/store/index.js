@@ -13,8 +13,8 @@ const store = new Vuex.Store({
     SET_COINS(state, moneda) {
       state.coins = moneda;
     },
-    SET_INDICATORS(state, indicador) {
-      state.inditators = indicador;
+    SET_INDICATORS(state, indicator) {
+      state.inditators = indicator;
     }
   },
   actions: {
@@ -35,8 +35,8 @@ const store = new Vuex.Store({
       commit("SET_COINS", moneda);
     },
     //Consulta la API de CoinPaprika para obtener los indicadores de una moneda
-    async get_indicators({commit}){
-      const urlIndicators = `https://api.coinpaprika.com/v1/coins/btc-bitcoin/ohlcv/historical?start=2022-04-07&end=2022-04-13`
+    async get_indicators({commit, state} , id) {
+      const urlIndicators = `https://api.coinpaprika.com/v1/coins/${id}/ohlcv/historical?start=2022-04-07&end=2022-04-13`
       const response = await axios.get(urlIndicators);
       const  { data: indicator }  = response;
       console.log(indicator)
@@ -44,10 +44,13 @@ const store = new Vuex.Store({
     }
   },
   getters: {
+    getIndicators(state) {
+      return state.inditators;
+    }
+
   },
 });
 
 store.dispatch("get_coins");
-store.dispatch("get_indicators");
 
 export default store;

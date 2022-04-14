@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 const customLabels = {
   first: "Primero",
   last: "Ultimo",
@@ -51,13 +51,15 @@ export default {
     };
   },
   computed: {
-    ...mapState(["coins"]),
+    ...mapState(["coins","indicators"]),
   },
   methods: {
+    ...mapActions(["get_indicators"]),
     onChangePage(pageOfItems) {
       this.pageOfItems = pageOfItems;
     },
-    showDetails(id){
+    async showDetails(id){
+      await this.get_indicators(id);
       const coinRute = `/coins/${id}`;
       this.$router.push(coinRute);
     }

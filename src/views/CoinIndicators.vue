@@ -9,8 +9,7 @@ import CardCoinIndicator from "@/components/CardCoinIndicator.vue";
 export default {
     components:{
         CardCoinIndicator,
-    },
-    
+    },    
 }
 </script>
 
