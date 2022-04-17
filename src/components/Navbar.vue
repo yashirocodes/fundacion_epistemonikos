@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link to="/coins">Coins</router-link>
+              <router-link class="nav-link" to="/coins">Coins</router-link>
             </li>
             <li class="nav-item">
               

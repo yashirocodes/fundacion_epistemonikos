@@ -3,7 +3,7 @@
     <main class="container mt-5">
       <section class="row">
         <article
-          class="col-12 col-lg-4"
+          class="col-12 col-md-6 col-lg-4"
           v-for="(coin, i) in pageOfItems"
           :key="i"
         >
@@ -24,12 +24,16 @@
           </div>
         </article>
       </section>
-      <jw-pagination
+      <div class="container d-flex justify-content-center my-5">
+        <jw-pagination
         :pageSize="itemNumber"
         :labels="customLabels"
         :items="coins"
+        :maxPages="maxPages"
         @changePage="onChangePage"
+        
       ></jw-pagination>
+      </div>
     </main>
   </div>
 </template>
@@ -39,8 +43,8 @@ import { mapState, mapActions } from "vuex";
 const customLabels = {
   first: "Primero",
   last: "Ultimo",
-  previous: "Anterior",
-  next: "Siguiente",
+  previous: "<",
+  next: ">",
 };
 export default {
   data() {
@@ -48,6 +52,7 @@ export default {
       pageOfItems: [],
       customLabels,
       itemNumber: 15,
+      maxPages: 3,
     };
   },
   computed: {
@@ -69,7 +74,7 @@ export default {
 
 <style scoped>
 .card{
-  width: 18rem;
+  width: 20rem;
 }
 .alert{
   width: 5rem;
