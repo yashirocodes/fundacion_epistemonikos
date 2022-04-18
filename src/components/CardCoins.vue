@@ -24,7 +24,8 @@
           </div>
         </article>
       </section>
-      <div class="container d-flex justify-content-center my-5">
+    </main>
+    <footer class="container-fluid d-flex justify-content-center my-5">
         <jw-pagination
         :pageSize="itemNumber"
         :labels="customLabels"
@@ -33,8 +34,7 @@
         @changePage="onChangePage"
         
       ></jw-pagination>
-      </div>
-    </main>
+      </footer>
   </div>
 </template>
 
