@@ -27,6 +27,7 @@
       <table class="table">
         <thead class="bg-dark text-light text-center">
           <tr>
+            <th scope="col">Fecha</th>
             <th scope="col">Apertura</th>
             <th scope="col">Cierre</th>
             <th scope="col">Precio mas alto</th>
@@ -35,6 +36,7 @@
         </thead>
         <tbody class="text-center">
           <tr v-for="(item, i) in getIndicators.indicators" :key="i">
+            <td>{{ formatDateString(item.time_open) }}</td>
             <td>$ {{ formatCoin(item.open) }}</td>
             <td>$ {{ formatCoin(item.close) }}</td>
             <td>$ {{ formatCoin(item.high) }}</td>
@@ -49,10 +51,12 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { DateTime } from "luxon";
 export default {
   name: "CardCoinIndicator",
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     ...mapGetters(["getIndicators"]),
@@ -60,6 +64,10 @@ export default {
   methods: {
     formatCoin(coin) {
       return coin.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    },
+    formatDateString(date) {
+     const dt = DateTime
+     return dt.fromISO(date).toFormat('yyyy LL dd')
     },
   },
 };

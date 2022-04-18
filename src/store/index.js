@@ -1,6 +1,8 @@
 import axios from "axios";
 import Vue from "vue";
-import Vuex, { Store } from "vuex";
+import Vuex from "vuex";
+//Luxon date time library
+import { DateTime } from "luxon"
 
 Vue.use(Vuex);
 
@@ -37,7 +39,12 @@ const store = new Vuex.Store({
     //Consulta la API de CoinPaprika para obtener los indicadores de una moneda
     async get_indicators({commit, state} , id) {
       const copiaCoin = state.coins.filter(coin => coin.id === id);
-      const urlIndicators = `https://api.coinpaprika.com/v1/coins/${id}/ohlcv/historical?start=2022-04-07&end=2022-04-13`
+      //DATE TIME SETTINGS
+      const date = DateTime.local();
+      const fechaActual = date.toFormat("yyyy-MM-dd");
+      const fechaAnterior = date.minus({ days: 6 }).toFormat("yyyy-MM-dd");
+      //
+      const urlIndicators = `https://api.coinpaprika.com/v1/coins/${id}/ohlcv/historical?start=${fechaAnterior}&end=${fechaActual}&interval=1d`;
       const response = await axios.get(urlIndicators);
       const  { data: indicator }  = response;
       const coinAndIndicators = {
