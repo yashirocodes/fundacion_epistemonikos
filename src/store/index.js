@@ -51,7 +51,6 @@ const store = new Vuex.Store({
         coin: copiaCoin[0],
         indicators: indicator
       }
-      console.log(coinAndIndicators)
       commit("SET_INDICATORS", coinAndIndicators);
     }
   },
