@@ -1,34 +1,48 @@
 <template>
   <div>
     <div class="container">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title">
-            Indicadores de {{ getIndicators.coin.name }}
-          </h5>
+      <div class="row">
+        <div class="col-12 col-md-6 mx-auto">
+          <div class="card my-4">
+            <div class="card-header">
+              <h5 class="card-title text-center">
+                Indicadores de {{ getIndicators.coin.name }}
+              </h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center"><strong>{{getIndicators.coin.symbol}}</strong></li>
+              </ul>
+              <div v-if="getIndicators.coin.is_active === true" class="alert alert-success m-auto">
+                    Activa
+                  </div>
+                  <div v-else class="alert alert-danger m-auto">Caida</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="container">
+      <div class="table-responsive">
       <table class="table">
-        <thead>
+        <thead class="bg-dark text-light text-center">
           <tr>
-            <th scope="col">Open</th>
-            <th scope="col">CLose</th>
-            <th scope="col">High</th>
-            <th scope="col">Low</th>
+            <th scope="col">Apertura</th>
+            <th scope="col">Cierre</th>
+            <th scope="col">Precio mas alto</th>
+            <th scope="col">Precio mas bajo</th>
           </tr>
         </thead>
-        <tbody>
-          <tr  v-for="(item, i) in getIndicators.indicators" :key="i">
-            <td>$ {{formatCoin(item.open)}}</td>
-            <td>$ {{formatCoin(item.close)}}</td>
-            <td>$ {{formatCoin(item.high)}}</td>
-            <td>$ {{formatCoin(item.low)}}</td>
+        <tbody class="text-center">
+          <tr v-for="(item, i) in getIndicators.indicators" :key="i">
+            <td>$ {{ formatCoin(item.open) }}</td>
+            <td>$ {{ formatCoin(item.close) }}</td>
+            <td>$ {{ formatCoin(item.high) }}</td>
+            <td>$ {{ formatCoin(item.low) }}</td>
           </tr>
-
         </tbody>
       </table>
+    </div>
     </div>
   </div>
 </template>
@@ -44,12 +58,19 @@ export default {
     ...mapGetters(["getIndicators"]),
   },
   methods: {
-    formatCoin(coin){
-      return coin.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-    }
+    formatCoin(coin) {
+      return coin.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
+.card {
+  width: 100%;
+}
+.alert {
+  width: 8rem;
+  text-align: center;
+}
 </style>
